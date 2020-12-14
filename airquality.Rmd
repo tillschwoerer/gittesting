@@ -40,3 +40,21 @@ df %>%
   summarise(mean(no2, na.rm=TRUE))
 ```
 
+## NO2 Scatterplot
+
+```{r}
+df %>%
+  ggplot(mapping = aes(x = date, y = no2)) +
+  geom_point()
+```
+
+## Plot: NO2 Emissions by day
+```{r}
+df %>% 
+  group_by(wday) %>%
+  summarise(no2 = mean(no2, na.rm=TRUE)) %>%
+  ggplot(mapping = aes(x = wday, y = no2)) +
+  geom_col()
+```
+ 
+ 
