@@ -1,0 +1,13 @@
+---
+title: "Air quality analysis"
+author: "Tillmann Schwörer"
+date: "WS 2020/21"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    df_print: paged
+    code_folding: show  
+    highlight: tango
+    number_sections: true
+---
