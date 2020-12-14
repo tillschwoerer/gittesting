@@ -11,3 +11,32 @@ output:
     highlight: tango
     number_sections: true
 ---
+
+```{r}
+library(tidyverse)
+library(saqgetr)   # Access to air quality data across Europe
+library(lubridate) # Date and time related functions
+```
+
+```{r}
+sites <- get_saq_sites() %>% select(site, site_name)
+df <- get_saq_observations(site = "desh027", start = 2018, end = 2020) %>%
+saq_clean_observations(summary="hour", spread=TRUE) %>%
+  mutate(year = year(date), month = month(date, label=TRUE),
+  wday = wday(date, label=TRUE), hour = hour(date)) %>%
+  left_join(sites, by = "site")
+```
+
+# Analysis
+## Average NO2 Emissions
+```{r}
+df %>% summarise(mean(no2, na.rm= TRUE))
+```
+
+## NO2 Emissions by day of week
+```{r}
+df %>% 
+  group_by(wday) %>%
+  summarise(mean(no2, na.rm=TRUE))
+```
+
