@@ -27,3 +27,16 @@ saq_clean_observations(summary="hour", spread=TRUE) %>%
   left_join(sites, by = "site")
 ```
 
+# Analysis
+## Average NO2 Emissions
+```{r}
+df %>% summarise(mean(no2, na.rm= TRUE))
+```
+
+## NO2 Emissions by day of week
+```{r}
+df %>% 
+  group_by(wday) %>%
+  summarise(mean(no2, na.rm=TRUE))
+```
+
